@@ -4,16 +4,21 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
+
 <MudLayout>
-    <MudAppBar Elevation="0">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+
+    
+    <Header/>
+    <MudStack Style="margin-top:0px; margin-bottom:0px; background-color:grey;" Row="true">
+        <MudIconButton Style="margin-left:10px; color:white;" Icon="@Icons.Material.Filled.Menu"  Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Inherit" Link="https://mudblazor.com/" Target="_blank" />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/ornerylion" Target="_blank" />
-    </MudAppBar>
-    <MudDrawer ClipMode="DrawerClipMode.Always" @bind-Open="_drawerOpen" Elevation="1">
+        <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.LinkedIn" Link="https://www.linkedin.com/in/aaroncskinner/" Target="_blank" />
+        <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.GitHub" Link="https://github.com/ornerylion" Target="_blank" />
+    </MudStack>
+
+    <MudDrawer Style="background-color:grey; position:absolute"  @bind-Open="_drawerOpen" Elevation="1">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Portfolio</MudText>
+            <MudText Style="color:white;" Typo="Typo.h6">Portfolio</MudText>
         </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
@@ -25,10 +30,13 @@
 </MudLayout>
 
 @code {
-    bool _drawerOpen = false;
+    bool _drawerOpen = true;
+
 
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
 }
+
+
