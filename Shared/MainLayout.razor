@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 <MudThemeProvider />
-<MudDialogProvider />
+<MudDialogProvider/>
 <MudSnackbarProvider />
 
 
@@ -12,8 +12,15 @@
     <MudStack Style="margin-top:0px; margin-bottom:0px; background-color:grey;" Row="true">
         <MudIconButton Style="margin-left:10px; color:white;" Icon="@Icons.Material.Filled.Menu"  Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
-        <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.LinkedIn" Link="https://www.linkedin.com/in/aaroncskinner/" Target="_blank" />
-        <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.GitHub" Link="https://github.com/ornerylion" Target="_blank" />
+        <MudTooltip Text="LinkedIn">
+            <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.LinkedIn" Link="https://www.linkedin.com/in/aaroncskinner/" Target="_blank" />
+        </MudTooltip>
+        <MudTooltip Text="Github">
+            <MudIconButton Style="color:white;" Icon="@Icons.Custom.Brands.GitHub" Link="https://github.com/ornerylion" Target="_blank" />
+        </MudTooltip>
+        <MudTooltip Text="Login">
+            <MudIconButton Style="color:white; margin-right:15px; " Icon="@Icons.Material.Filled.Login" Link="/login" />
+        </MudTooltip>
     </MudStack>
 
     <MudDrawer Style="background-color:grey; position:absolute"  @bind-Open="_drawerOpen" Elevation="1">

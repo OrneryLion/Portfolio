@@ -1,1 +1,29 @@
 ﻿@page "/"
+
+@inject IDialogService DialogService
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+@code{
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+        var cookieContent = await localStorage.GetItemAsync<string>("cookieName");
+
+        if(cookieContent == null)
+            {
+            OpenDialog();
+            await localStorage.SetItemAsync("cookieName","Gonna put the username here.");
+            }
+        else
+            {
+            Console.WriteLine("We have a cookie with contents: " + cookieContent);
+            }
+
+        }
+    private void OpenDialog()
+        {
+        var options = new DialogOptions { CloseOnEscapeKey = true , DisableBackdropClick = true };
+        DialogService.Show<FirstRenderModal>("Welcome !",options);
+        }
+}

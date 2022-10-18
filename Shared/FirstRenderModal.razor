@@ -1,0 +1,32 @@
+﻿@inject IDialogService DialogService
+
+<MudDialog >
+    <DialogContent>
+        <MudText>
+            Thank you for visiting! It looks like it is your first time here, if you'd like a virtual tour of my portfolio click "Show Me The Way"
+        </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Show Me The Way</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit()
+        {
+        MudDialog.Close(DialogResult.Ok(true));
+
+        OpenDialog();
+        }
+
+
+    void Cancel() => MudDialog.Cancel();
+
+    private void OpenDialog()
+        {
+        var options = new DialogOptions { CloseOnEscapeKey = true, DisableBackdropClick = true, Position = DialogPosition.CenterRight, CloseButton = true };
+    DialogService.Show<AppBarModal>("Quick Links",options);
+        }
+}

@@ -1,0 +1,33 @@
+﻿@inject IDialogService DialogService
+
+<MudDialog Style="margin-top:100px;">
+    <DialogContent>
+        <MudText>
+           Icon buttons to my GitHub, Login page & LinkedIn
+        </MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Continue</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit()
+        {
+        MudDialog.Close(DialogResult.Ok(true));
+
+        OpenDialog();
+        }
+
+
+    void Cancel() => MudDialog.Cancel();
+
+    private void OpenDialog()
+        {
+        var options = new DialogOptions { CloseOnEscapeKey = true, DisableBackdropClick = true, Position = DialogPosition.CenterLeft };
+        DialogService.Show<SideBarModal>("Project Links",options);
+        }
+}
