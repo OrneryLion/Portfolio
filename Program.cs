@@ -7,13 +7,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Blazored.LocalStorage;
 
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PortfolioContextConnection") ?? throw new InvalidOperationException("Connection string 'PortfolioContextConnection' not found.");
+var serverVersion = ServerVersion.AutoDetect(connectionString);
 
 builder.Services.AddDbContext<PortfolioContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseMySql(connectionString, serverVersion));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => { options.SignIn.RequireConfirmedAccount = true; options.Password.RequiredLength = 4; options.Password.RequireNonAlphanumeric = false; options.Password.RequireDigit = false; options.SignIn.RequireConfirmedEmail = false; options.SignIn.RequireConfirmedPhoneNumber = false;options.SignIn.RequireConfirmedAccount = false; options.Password.RequireUppercase = false; })
     .AddEntityFrameworkStores<PortfolioContext>();
 
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);

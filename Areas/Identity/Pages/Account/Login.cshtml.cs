@@ -66,6 +66,7 @@ namespace Portfolio.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
+
             public string Email { get; set; }
 
             /// <summary>
