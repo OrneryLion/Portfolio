@@ -26,6 +26,7 @@ builder.Services.AddBlazoredLocalStorage();   // local storage
 builder.Services.AddBlazoredLocalStorage(config => config.JsonSerializerOptions.WriteIndented = true);  // local storage
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<BrowserService>();
 builder.Services.AddMudServices();
 
 var app = builder.Build();

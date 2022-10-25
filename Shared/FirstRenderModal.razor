@@ -1,6 +1,6 @@
 ﻿@inject IDialogService DialogService
-
-<MudDialog >
+@inject BrowserService Service
+<MudDialog IsVisible=@isVisible>
     <DialogContent>
         <MudText>
             Thank you for visiting! It looks like it is your first time here, if you'd like a virtual tour of my portfolio click "Show Me The Way"
@@ -13,6 +13,9 @@
 </MudDialog>
 @code {
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    public int Height { get; set; }
+    public int Width { get; set; }
+    public bool isVisible { get; set; }
 
     void Submit()
         {
@@ -27,6 +30,15 @@
     private void OpenDialog()
         {
         var options = new DialogOptions { CloseOnEscapeKey = true, DisableBackdropClick = true, Position = DialogPosition.CenterRight, CloseButton = true };
-    DialogService.Show<AppBarModal>("Quick Links",options);
+        DialogService.Show<AppBarModal>("Quick Links",options);
+        }
+    async Task GetDimensions()
+        {
+        var dimension = await Service.GetDimensions();
+        Height = dimension.Height;
+        Width = dimension.Width;
+        if(Width <= 380){
+            isVisible = false;
+            }
         }
 }
